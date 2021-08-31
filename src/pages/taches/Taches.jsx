@@ -1,27 +1,30 @@
 import React from 'react';
-import { useTaches } from '../../hooks/useTaches/useTaches';
-import Tache from '../tache/Tache';
+import { useFetch } from '../../hooks';
+import Tache from '../../components/tache/Tache';
 
 const Taches = () => {
+
   const statusLabels = ['TO DO', 'WIP', 'TEST', 'DONE'];
-  const {taches, handleClick} = useTaches();
+  const {data = [], errors} = useFetch({path: 'taches'});
   return ( 
     <div className="container">
+      <h1>Liste de taches</h1>
       <div className="row">
         {
+          errors ? <p>{errors.message}</p>   :(
           [1, 2 ,3, 4].map((item) => (
             <div className="col-sm-3" key={item}>
               <h2>{statusLabels[item - 1]}</h2>
               {
                 React.Children.toArray(
-                    taches 
+                    data
                     .filter(tache => item === tache.statut)
-                    .map((tache) => <Tache tache={tache} item={item} handleClick={handleClick}/>)
+                    .map((tache) => <Tache tache={tache} item={item} handleClick={()=>{}}/>)
                 )
               }
             </div>
             
-          ))
+          )))
           
         }
       </div>

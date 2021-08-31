@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 const Tache = ({tache : {id, statut, titre, description, ti, tr}, handleClick}) => {
 
 
+  const {REACT_APP_API: dns} = process.env;
+
+  console.log(dns);
+
   return (
       <div className="tache card mb-3 text-dark" onClick={() => handleClick({id, statut})}>
       <div className="card-body">
@@ -19,7 +23,7 @@ const Tache = ({tache : {id, statut, titre, description, ti, tr}, handleClick}) 
   );
 }
  
-Tache.prototype = {
+Tache.propsType = {
   tache: shape({})
 }
 export default Tache;
