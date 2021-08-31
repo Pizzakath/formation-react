@@ -22,7 +22,7 @@ const Tache = ({tache : {id, statut, titre, description, ti, tr}, handleClick}) 
   );
 }
  
-Tache.prototype = {
+Tache.propsType = {
   tache: shape({})
 }
 export default Tache;

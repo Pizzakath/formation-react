@@ -1,13 +1,14 @@
 import React from 'react';
 import { useFetch } from '../../hooks';
-import Tache from '../tache/Tache';
+import Tache from '../../components/tache/Tache';
 
 const Taches = () => {
   
   const statusLabels = ['TO DO', 'WIP', 'TEST', 'DONE'];
-  const {data = [], errors} = useFetch({path: 'taches', options: {method: 'DELETE'}});
+  const {data = [], errors} = useFetch({path: 'taches'});
   return ( 
     <div className="container">
+      <h1>Liste de taches</h1>
       <div className="row">
         {
           errors ? <p>{errors.message}</p>   :(
