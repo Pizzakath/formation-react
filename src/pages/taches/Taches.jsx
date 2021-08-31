@@ -1,11 +1,13 @@
 import React from 'react';
-import { useFetch } from '../../hooks';
 import Tache from '../../components/Tache/Tache';
+import { useFetch } from '../../hooks';
 
 const Taches = () => {
 
   const statusLabels = ['TO DO', 'WIP', 'TEST', 'DONE'];
   const {data = [], errors} = useFetch({path: 'taches'});
+
+  console.log(data);
   return ( 
     <div className="container">
       <h1>Liste de taches</h1>
@@ -18,7 +20,7 @@ const Taches = () => {
               {
                 React.Children.toArray(
                     data
-                    .filter(tache => item === tache.statut)
+                    .filter(tache => item == tache.statut)
                     .map((tache) => <Tache tache={tache} item={item} handleClick={()=>{}}/>)
                 )
               }
