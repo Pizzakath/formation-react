@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFetch } from '../../hooks';
-import Tache from '../../components/tache/Tache';
+import Tache from '../../components/Tache/Tache';
 
 const Taches = () => {
 

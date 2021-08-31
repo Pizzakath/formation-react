@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import TacheEdit from "./pages/TacheEdit/TacheEdit";
-import Taches from "./pages/taches/Taches";
+import Taches from "./pages/Taches/Taches";
 function App() {
   const links = [
     {
