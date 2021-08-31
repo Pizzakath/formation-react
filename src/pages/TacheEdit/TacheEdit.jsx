@@ -1,16 +1,23 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useFetch } from '../../hooks';
 const TacheEdit = () => {
-  const history = useHistory()
-  const {editData} = useFetch({path: 'taches', options: {method: 'POST'}});
+  const {id} = useParams()
+  const history = useHistory();
+  const {editData} = useFetch({path: 'taches', options: {method: id ? 'PUT': 'POST'}});
   const { register, handleSubmit, formState: { errors } } = useForm();
+  
   const onSubmit = data => {
     editData({data});
-    history.push('/')
+    history.push('/');
   };
   const tache = {}
+
+
+
+
+
   return (
       <section className="page d-flex mt-4 align-items-top">
         <div className="container">

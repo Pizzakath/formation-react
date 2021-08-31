@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 export function useFetch({path, options = {}}) {
+  
   const {method = 'GET'} = options;
+  
   const {REACT_APP_API: dns} = process.env;
   const [data, setData] = useState([]);
   const [errors, setErrors] = useState();
