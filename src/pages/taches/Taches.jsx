@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTaches } from '../../hooks/useTaches/useTaches';
 import Tache from '../tache/Tache';
 
-const Taches = ({taches, handleClick}) => {
+const Taches = () => {
   const statusLabels = ['TO DO', 'WIP', 'TEST', 'DONE'];
+  const {taches, handleClick} = useTaches();
   return ( 
     <div className="container">
       <div className="row">

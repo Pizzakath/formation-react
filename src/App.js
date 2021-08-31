@@ -1,15 +1,56 @@
 import React from "react";
-import { useTaches } from "./hooks/useTaches/useTaches";
+
+  import { 
+        
+    BrowserRouter as Router,
+    
+    Redirect, 
+    
+    Route,
+    
+    Switch 
+     
+  } from "react-router-dom";
+  
+import Header from "./components/header/Header";
+import TacheEdit from "./pages/tache-edit/TacheEdit";
 import Taches from "./pages/taches/Taches";
 
 function App() {
 
-  const {taches, handleClick} = useTaches();
-
+  const links = [
+    {
+      name: 'Accueil',
+      to: '/'
+    },
+    {
+      name: 'Taches',
+      to: '/taches'
+    },
+    {
+      name: 'Nouvelle tache',
+      to: '/creer-une-tache'
+    }
+  ]
   return (
     <section>
-      <h1>Liste de taches</h1>
-      <Taches taches={taches} handleClick={handleClick}/>
+      <Router>
+        <Header links={links}/>
+        <Switch>
+          <Route path="/taches" component={Taches}>
+              <Taches/>
+          </Route>
+          <Route path="/creer-une-tache">
+              <TacheEdit />
+          </Route>
+          <Route path="/modifier/:id">
+              <TacheEdit />
+          </Route>
+          <Route path="/" exact>
+            <Redirect push to="/taches" />
+          </Route>
+        </Switch>
+      </Router>
     </section>
   );
 }
