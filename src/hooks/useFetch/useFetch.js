@@ -28,5 +28,5 @@ export function useFetch({path, options}) {
     executeFetch();
   }, [path]);
   
-  return {data, errors};
+  return {data: [], errors};
 }
