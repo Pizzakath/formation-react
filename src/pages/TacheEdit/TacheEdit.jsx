@@ -1,9 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { useFetch } from '../../hooks';
+import { lireTache } from '../../redux/selectors';
+
+
 const TacheEdit = () => {
-  const {id} = useParams()
+  const {id} = useParams();
+  const tache = useSelector((state) => lireTache({state, id}));
   const history = useHistory();
   const {editData} = useFetch({path: 'taches', options: {method: id ? 'PUT': 'POST'}});
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,19 +17,15 @@ const TacheEdit = () => {
     editData({data});
     history.push('/');
   };
-  const tache = {}
-
-
-
-
 
   return (
       <section className="page d-flex mt-4 align-items-top">
         <div className="container">
+          { tache ? (
           <div className="row">
             <div className="mx-auto col-md-6">
               <h4 className="page-title mb-2">
-                Nouvelel tache
+                Nouvelle tache
               </h4>
               <div>
                 <form
@@ -80,6 +81,7 @@ const TacheEdit = () => {
                       id="statut"
                       className="form-control form-control-lg"
                       {...register('statut', {   required: true })}
+                      defaultValue={tache && tache.statut}
                     >
                       <option>Sélectionner un statut {tache.status}</option>
                       <option value="1">TO DO</option>
@@ -120,6 +122,7 @@ const TacheEdit = () => {
               </div>
             </div>
           </div>
+          ): null}
         </div>
       </section>
   );

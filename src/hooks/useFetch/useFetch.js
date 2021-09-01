@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { enregistrerLesTaches } from "../../redux/actions";
 export function useFetch({path, options = {}}) {
   
   const {method = 'GET'} = options;
   
   const {REACT_APP_API: dns} = process.env;
-  const [data, setData] = useState([]);
   const [errors, setErrors] = useState();
-
+  
+  const dispatch = useDispatch();
+  
   const executeFetch = async (fetchOptions) =>{
       const reponse = await fetch(
           `${dns}/${path}`, 
@@ -23,7 +25,7 @@ export function useFetch({path, options = {}}) {
         setErrors({message: '404'})
       } else {
         const resultat = await reponse.json();
-        setData(resultat); 
+        dispatch(enregistrerLesTaches({taches: resultat})); 
       } 
   }
 
@@ -37,5 +39,5 @@ export function useFetch({path, options = {}}) {
     }
   }, [path]);
 
-  return {data, errors, editData};
+  return {data : [], errors, editData};
 }

@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Tache from '../../components/Tache/Tache';
 import { useFetch } from '../../hooks';
+import { tachesEnregistrees } from '../../redux/selectors';
 
 const Taches = () => {
 
   const statusLabels = ['TO DO', 'WIP', 'TEST', 'DONE'];
-  const {data = [], errors} = useFetch({path: 'taches'});
-
-  console.log(data);
+  const { errors} = useFetch({path: 'taches'});
+  const data = useSelector(tachesEnregistrees);
   return ( 
     <div className="container">
       <h1>Liste de taches</h1>
