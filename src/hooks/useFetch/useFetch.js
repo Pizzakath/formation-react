@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ApplicationContext } from '../../context/ApplicationContext';
 
 export function useFetch({path, options}) {
- 
+  
+  const {state, saveTaches} = useContext(ApplicationContext);
+
+
   const {REACT_APP_API: dns} = process.env;
-  const [data, setData] = useState([]);
   const [errors, setErrors] = useState();
 
   useEffect(()=> {
@@ -13,11 +16,17 @@ export function useFetch({path, options}) {
           setErrors({message: '404'})
         } else {
           const resultat = await reponse.json();
-          setData(resultat); 
+          
+          
+          saveTaches({taches: resultat});
+    
+    
+    
+    
         } 
     }
     executeFetch();
   }, [path]);
-
+  
   return {data, errors};
 }
